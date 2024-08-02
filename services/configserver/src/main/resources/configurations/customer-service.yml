@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://santho257:SGyzgE0JmQnwWgYL@sample.ek3sfld.mongodb.net/EcommerceCustomers
+
+
+
+
+#spring:
+#  data:
+#    mongodb:
+#      host: sample.ek3sfld.mongodb.net
+#      username: santho257
+#      password: SGyzgE0JmQnwWgYL
+#      database: EcommerceCustomers
+#      authentication-database: admin
+#      string-scheme: mongodb+srv
