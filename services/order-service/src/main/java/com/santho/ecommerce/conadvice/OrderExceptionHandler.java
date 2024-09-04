@@ -1,6 +1,7 @@
 package com.santho.ecommerce.conadvice;
 
 import com.santho.ecommerce.exceptions.OrderException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +15,11 @@ import java.util.Map;
 public class OrderExceptionHandler {
     @ExceptionHandler(OrderException.class)
     public ResponseEntity<String> handleOrderException(OrderException ex){
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(EntityNotFoundException ex){
         return ResponseEntity.status(404).body(ex.getMessage());
     }
 
