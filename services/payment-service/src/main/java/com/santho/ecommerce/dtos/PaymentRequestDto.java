@@ -1,6 +1,8 @@
 package com.santho.ecommerce.dtos;
 
 import com.santho.ecommerce.models.PaymentMethod;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
@@ -11,9 +13,11 @@ import java.math.BigDecimal;
 @Builder
 @Validated
 public class PaymentRequestDto {
-    private String id;
-    private BigDecimal amount;
-    private PaymentMethod paymentMethod;
-    private int orderId;
-    private CustomerDto customer;
+        private String id;
+        @Min(value = 1,message = "Minimum amount should be 1")
+        private BigDecimal amount;
+        private PaymentMethod paymentMethod;
+        @NotNull(message = "Order Id Cannot be Empty")
+        private int orderId;
+        private CustomerDto customer;
 }
