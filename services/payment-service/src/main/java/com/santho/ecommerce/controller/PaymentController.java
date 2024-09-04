@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/payments")
 @RequiredArgsConstructor
 public class PaymentController {
     private final PaymentService paymentService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Integer> create(@RequestBody @Valid PaymentRequestDto request){
         return ResponseEntity.ok(paymentService.createPayment(request));
     }

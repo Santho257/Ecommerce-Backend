@@ -3,6 +3,7 @@ package com.santho.ecommerce.services;
 import com.santho.ecommerce.dtos.*;
 import com.santho.ecommerce.exceptions.OrderException;
 import com.santho.ecommerce.feigns.CustomerFeign;
+import com.santho.ecommerce.feigns.PaymentFeign;
 import com.santho.ecommerce.feigns.ProductFeign;
 import com.santho.ecommerce.kafka.OrderProducer;
 import com.santho.ecommerce.mappers.OrderMapper;
@@ -20,6 +21,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService{
     private final CustomerFeign customerFeign;
     private final ProductFeign productFeign;
+    private final PaymentFeign paymentFeign;
     private final OrderRepository orderRepository;
     private final OrderProductService orderProductService;
     private final OrderProducer producer;
@@ -46,7 +48,14 @@ public class OrderServiceImpl implements OrderService{
                             .build());
                 });
 
+
         //todo Payment Pending
+        paymentFeign.create(PaymentRequestDto.builder()
+                        .amount(request.getAmount())
+                        .paymentMethod(request.getPaymentMethod())
+                        .customer(customer)
+                        .orderId(order.getId())
+                .build());
 
         producer.sendOrderConfirmation(OrderMapper.toOrderResponse(order, customer,
                 (List<PurchaseResponseDto>) purchaseResponse.getBody()));
