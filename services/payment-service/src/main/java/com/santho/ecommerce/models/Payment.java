@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "payment")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
