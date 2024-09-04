@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService{
                         .toList()
         );
         if(products.size() != purchaseRequest.size())
-            throw new EntityNotFoundException("One or More products doesnot exists");
+            throw new EntityNotFoundException("One or More products doesn't exists");
         List<ProductPurchaseResponseDto> response = new ArrayList<>(products.size());
         for(int i = 0; i < products.size(); i++){
             Product prod = products.get(i);

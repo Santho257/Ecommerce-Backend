@@ -30,6 +30,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.REMOVE)
     private List<OrderProduct> orderProducts;
 

@@ -8,6 +8,7 @@ import com.santho.ecommerce.kafka.OrderProducer;
 import com.santho.ecommerce.mappers.OrderMapper;
 import com.santho.ecommerce.models.Order;
 import com.santho.ecommerce.repositories.OrderRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService{
     private final OrderProducer producer;
 
     @Override
-    public ResponseEntity<Integer> createOrder(OrderRequestDto request) {
+    public Integer createOrder(OrderRequestDto request) {
         ResponseEntity<?> customerResponse = customerFeign.findById(request.getCustomerId());
         if(customerResponse.getStatusCode().isError())
             throw new OrderException(customerResponse.getBody().toString());
@@ -47,15 +48,20 @@ public class OrderServiceImpl implements OrderService{
 
         //todo Payment Pending
 
-        //todo Kafka Notification Send to User
-        producer.sendOrderConfirmation(OrderResponseDto
-                .builder()
-                .id(order.getId())
-                .customerResponseDto(customer)
-                .paymentMethod(order.getPaymentMethod())
-                .purchase((List<PurchaseResponseDto>) purchaseResponse.getBody())
-                .totalAmount(order.getAmount())
-                .build());
+        producer.sendOrderConfirmation(OrderMapper.toOrderResponse(order, customer,
+                (List<PurchaseResponseDto>) purchaseResponse.getBody()));
         return null;
+    }
+
+    @Override
+    public List<OrderResponseGlobalDto> getOrders() {
+        return orderRepository.findAll().stream().map(OrderMapper::toGlobalOrderResponse).toList();
+    }
+
+    @Override
+    public OrderResponseGlobalDto getOrderById(Integer id) {
+        return orderRepository.findById(id)
+                .map(OrderMapper::toGlobalOrderResponse)
+                .orElseThrow(() -> new EntityNotFoundException("Order Not found with ID: " + id));
     }
 }
