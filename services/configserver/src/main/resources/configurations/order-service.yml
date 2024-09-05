@@ -25,6 +25,6 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.trusted.packages: "com.santho.ecommerce.*"
-        spring.json.type.mapping: orderResponseDto:com.santho.ecommerce.dtos.OrderResponseDto,payment:com.santho.ecommerce.dtos.payment.PaymentNotificationRequest
+        spring.json.type.mapping: order:com.santho.ecommerce.dtos.OrderResponseDto,payment:com.santho.ecommerce.dtos.payment.PaymentNotificationRequest
   mail:
     host:
