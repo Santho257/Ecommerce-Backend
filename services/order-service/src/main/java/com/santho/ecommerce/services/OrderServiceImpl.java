@@ -48,8 +48,6 @@ public class OrderServiceImpl implements OrderService{
                             .build());
                 });
 
-
-        //todo Payment Pending
         paymentFeign.create(PaymentRequestDto.builder()
                         .amount(request.getAmount())
                         .paymentMethod(request.getPaymentMethod())

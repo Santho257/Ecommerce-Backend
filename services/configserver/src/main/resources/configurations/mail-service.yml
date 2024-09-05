@@ -1,0 +1,31 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://santho257:SGyzgE0JmQnwWgYL@sample.ek3sfld.mongodb.net/ECommerceKafkaStreams
+  kafka:
+    producer:
+      bootstrap-servers: http://localhost:9092
+      group-id: paymentGroup,consumerGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.type.mapping: order:com.santho.ecommerce.dtos.order.OrderResponseDto,payment:com.santho.ecommerce.dtos.payment.PaymentNotificationRequest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: prolaboffl@gmail.com
+    password: tocq dmbs iacv xzdr
+    properties:
+      mail:
+        smtp:
+          trust: '*'
+        auth: true
+        starttls:
+          enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+
+server:
+  port: 8085

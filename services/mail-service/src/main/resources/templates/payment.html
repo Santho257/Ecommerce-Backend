@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .payment-details {
+            margin-top: 20px;
+        }
+        .payment-summary {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .payment-summary th, .payment-summary td {
+            padding: 8px;
+            text-align: left;
+        }
+        .total-amount {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>Payment Confirmation</h2>
+    </div>
+
+    <div class="payment-details">
+        <p>Dear <span th:text="${customer-name}">Customer</span>,</p>
+        <p>We have successfully received your payment. Here are the details:</p>
+    </div>
+
+    <div class="payment-summary">
+        <h3>Payment Information</h3>
+        <table width="100%" border="1">
+            <tbody>
+            <tr>
+                <th>Payment ID</th>
+                <td th:text="${payment-Id}">12345</td>
+            </tr>
+            <tr>
+                <th>Order ID</th>
+                <td th:text="${order-id}">54321</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td th:text="${amount}">$100.00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for your payment!</p>
+        <p>If you have any questions, please feel free to contact us at support@example.com.</p>
+        <p>Best regards,</p>
+        <p>The Payment Team</p>
+    </div>
+</div>
+
+</body>
+</html>
