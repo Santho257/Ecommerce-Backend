@@ -5,7 +5,7 @@ spring:
   kafka:
     producer:
       bootstrap-servers: http://localhost:9092
-      group-id: paymentGroup,consumerGroup
+      group-id: paymentGroup,orderGroup
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

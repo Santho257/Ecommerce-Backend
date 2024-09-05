@@ -19,7 +19,7 @@ public class NotificationConsumer {
     private final NotificationRepository notificationRepository;
     private final MailService mailService;
 
-    @KafkaListener(topics = "order-topic")
+    @KafkaListener(topics = "order-topic", groupId = "orderGroup")
     public void consumeOrder(OrderResponseDto order) throws MessagingException {
         log.info("Consuming data from order-topic :: {}", order);
         notificationRepository.save(Notification.builder()
@@ -29,7 +29,7 @@ public class NotificationConsumer {
         mailService.sendOrderMail(order);
     }
 
-    @KafkaListener(topics = "payment-topic")
+    @KafkaListener(topics = "payment-topic", groupId = "paymentGroup")
     public void consumePayment(PaymentNotificationRequest payment) throws MessagingException {
         log.info("Consuming data from payment-topic :: {}", payment);
         notificationRepository.save(Notification.builder()
