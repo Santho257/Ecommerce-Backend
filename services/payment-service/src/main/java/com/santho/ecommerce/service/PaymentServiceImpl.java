@@ -3,6 +3,7 @@ package com.santho.ecommerce.service;
 import com.santho.ecommerce.dtos.PaymentRequestDto;
 import com.santho.ecommerce.kafka.NotificationProducer;
 import com.santho.ecommerce.mappers.PaymentMapper;
+import com.santho.ecommerce.models.Payment;
 import com.santho.ecommerce.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public Integer createPayment(PaymentRequestDto request) {
-        paymentRepository.save(PaymentMapper.toPayment(request));
-        notificationProducer.sendNotification(PaymentMapper.toNotification(request));
+        Payment payment = paymentRepository.save(PaymentMapper.toPayment(request));
+        notificationProducer.sendNotification(PaymentMapper.toNotification(payment, request));
         return 0;
     }
 }

@@ -13,15 +13,15 @@ public class PaymentMapper {
                 .build();
     }
 
-    public static PaymentNotificationRequest toNotification(PaymentRequestDto requestDto){
+    public static PaymentNotificationRequest toNotification(Payment payment,PaymentRequestDto requestDto){
         return PaymentNotificationRequest.builder()
-                .id(requestDto.getId())
-                .amount(requestDto.getAmount())
+                .id(payment.getId())
+                .amount(payment.getAmount())
                 .email(requestDto.getCustomer().getEmail())
                 .firstName(requestDto.getCustomer().getFirstName())
                 .lastName(requestDto.getCustomer().getLastName())
-                .orderId(requestDto.getOrderId())
-                .paymentMethod(requestDto.getPaymentMethod())
+                .orderId(payment.getOrderId())
+                .paymentMethod(payment.getPaymentMethod())
                 .build();
     }
 }

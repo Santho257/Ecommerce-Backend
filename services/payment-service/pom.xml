@@ -11,7 +11,7 @@
 	<groupId>com.santho</groupId>
 	<artifactId>payment-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Payment Service</name>
+	<name>payment-service</name>
 	<description>Payment related services for Ecommerce Web application</description>
 	<url/>
 	<licenses>
@@ -58,7 +58,9 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+			<version>10.17.3</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.postgresql</groupId>

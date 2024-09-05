@@ -13,11 +13,8 @@ import java.math.BigDecimal;
 @Builder
 @Validated
 public class PaymentRequestDto {
-        @Min(value = 1,message = "Minimum amount should be 1")
         private BigDecimal amount;
-        @NotNull
         private PaymentMethod paymentMethod;
-        @NotNull(message = "Order Id Cannot be Empty")
         private int orderId;
         private CustomerDto customer;
 }
